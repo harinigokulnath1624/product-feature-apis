@@ -11,8 +11,8 @@ const getProducts = (req, res, next) => {
 
 const addProduct = (req, res, next) => {
   try {
-    const { name, price } = req.body;
-    const product = productService.createProduct(name, price);
+    const { name, price, category } = req.body;
+    const product = productService.createProduct(name, price, category);
     res.status(201).json({ message: "Product added" }, product);
   } catch (error) {
     next(error);
@@ -21,8 +21,13 @@ const addProduct = (req, res, next) => {
 
 const editProduct = (req, res, next) => {
   try {
-    const { name, price } = req.body;
-    const product = productService.updateProduct(req.params.id, name, price);
+    const { name, price, category } = req.body;
+    const product = productService.updateProduct(
+      req.params.id,
+      name,
+      price,
+      category,
+    );
     res.status(200).json({ message: "Product updated" }, product);
   } catch (error) {
     next(error);
